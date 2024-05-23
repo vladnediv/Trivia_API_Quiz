@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaAPI_Quiz"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Icon="C:\Users\sanyk\Documents\GitHub\Trivia_API_Quiz\TriviaAPI Quiz\TriviaAPI Quiz\Resources\Image\QuizIcon.png">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource ImageAvatarBorderStyle}">
+            <Image Name="userAvatarImage" Style="{StaticResource ImageAvatarStyle}" Source="C:\Users\sanyk\Desktop\McLaren-P1-L-620x413.jpg"></Image>
+        </Border>
+        <TextBlock Name="usernameTextBlock" Style="{StaticResource UsernameTextBlockStyle}" Text="{Binding}">User</TextBlock>
+        <StackPanel Style="{StaticResource ButtonImageStackPanel}">
+            <Button Name="loadImageButton" Style="{StaticResource ImageButtonStyle}" Command="{Binding}">Load image</Button>
+            <Button Name="saveImageButton" Style="{StaticResource ImageButtonStyle}" Command="{Binding}">Save image</Button>
+        </StackPanel>
     </Grid>
 </Window>

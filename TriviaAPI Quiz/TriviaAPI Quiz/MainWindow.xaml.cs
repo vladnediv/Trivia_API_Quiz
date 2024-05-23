@@ -19,6 +19,9 @@ namespace TriviaAPI_Quiz
         public MainWindow()
         {
             InitializeComponent();
+            //DataContext = new MainViewModel();
+            //Icon = "pack://application:,,,/Resources/Image/QuizIcon.png"
+            //Icon = "Resources/Image/QuizIcon.png"
         }
     }
 }
