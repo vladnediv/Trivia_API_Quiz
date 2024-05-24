@@ -7,24 +7,62 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         Icon="C:\Users\sanyk\Documents\GitHub\Trivia_API_Quiz\TriviaAPI Quiz\TriviaAPI Quiz\Resources\Image\QuizIcon.png">
-    <Grid>
+    <Grid x:Name="myGrid">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="C:\Users\sanyk\Documents\GitHub\Trivia_API_Quiz\TriviaAPI Quiz\TriviaAPI Quiz\Resources\Image\MainBackground3.png" />
+        </Grid.Background>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*"/>
+            <ColumnDefinition Width="1.2*"/>
             <ColumnDefinition Width="0.6*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
             <RowDefinition/>
-            <RowDefinition Height="1.2*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition />
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Style="{StaticResource ImageAvatarBorderStyle}">
             <Image Name="userAvatarImage" Style="{StaticResource ImageAvatarStyle}" Source="C:\Users\sanyk\Desktop\McLaren-P1-L-620x413.jpg"></Image>
         </Border>
-        <TextBlock Name="usernameTextBlock" Style="{StaticResource UsernameTextBlockStyle}" Text="{Binding}">User</TextBlock>
+        <TextBox Name="usernameTextBlock" Style="{StaticResource UsernameTextBoxStyle}" >User</TextBox>
         <StackPanel Style="{StaticResource ButtonImageStackPanel}">
             <Button Name="loadImageButton" Style="{StaticResource ImageButtonStyle}" Command="{Binding}">Load image</Button>
             <Button Name="saveImageButton" Style="{StaticResource ImageButtonStyle}" Command="{Binding}">Save image</Button>
         </StackPanel>
+        <Label Style="{StaticResource StatictixsLabelStyle}">Statistics</Label>
+        <Label Style="{StaticResource DifficultyLabelStyle}" Grid.Row="2">Hard level:</Label>
+        <Label Style="{StaticResource DifficultyLabelStyle}" Grid.Row="3">Medium level:</Label>
+        <Label Style="{StaticResource DifficultyLabelStyle}" Grid.Row="4">Easy level:</Label>
+        <Label Style="{StaticResource DifficultyLabelStyle}" Grid.Row="6">TOTAL:</Label>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3">
+            <TextBlock Name="hardSucsessTextBlock" Style="{StaticResource HardLevelTextBlockkStyle}"> 1</TextBlock>
+            <TextBlock Style="{StaticResource HardLevelTextBlockkStyle}"> of</TextBlock>
+            <TextBlock Name="hardTotalTaxtBlock" Style="{StaticResource HardLevelTextBlockkStyle}"> 6</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3">
+            <TextBlock Name="mediumSucsessTextBlock" Style="{StaticResource MediumLevelTextBlockkStyle}"> 1</TextBlock>
+            <TextBlock Style="{StaticResource MediumLevelTextBlockkStyle}"> of</TextBlock>
+            <TextBlock Name="mediumTotalTaxtBlock" Style="{StaticResource MediumLevelTextBlockkStyle}"> 6</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="3">
+            <TextBlock Name="easySucsessTextBlock" Style="{StaticResource EasyLevelTextBlockkStyle}"> 1</TextBlock>
+            <TextBlock Style="{StaticResource EasyLevelTextBlockkStyle}"> of</TextBlock>
+            <TextBlock Name="easyTotalTaxtBlock" Style="{StaticResource EasyLevelTextBlockkStyle}"> 6</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="3">
+            <TextBlock Name="totalSucsessTextBlock" Style="{StaticResource TotalTextBlockkStyle}"> 1</TextBlock>
+            <TextBlock Style="{StaticResource TotalTextBlockkStyle}"> of</TextBlock>
+            <TextBlock Name="totalTotalTaxtBlock" Style="{StaticResource TotalTextBlockkStyle}"> 6</TextBlock>
+        </StackPanel>
+        <Button Content="History" Style="{StaticResource HistoryButtonStyle}" Command="{Binding}"/>
+        <Button Content="Let's Play" Style="{StaticResource LetsPlayButtonStyle}" Command="{Binding}"/>
     </Grid>
 </Window>
