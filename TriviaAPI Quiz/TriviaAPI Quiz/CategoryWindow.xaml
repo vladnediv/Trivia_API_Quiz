@@ -11,6 +11,10 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="C:\Users\sanyk\Documents\GitHub\Trivia_API_Quiz\TriviaAPI Quiz\TriviaAPI Quiz\Resources\Image\MainBackground3.png" />
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
         <ScrollViewer Style="{StaticResource CategoryScrollViewerStyle}">
             <ListBox Name="ResultsListBox" Style="{StaticResource CategoryListBoxStyle}" ItemsSource="{Binding}" SelectedItem="{Binding SelectedArticle}">
                 <ListBox.ItemsPanel>
@@ -64,5 +68,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
+        <Button Content="Back to main menu" Style="{StaticResource CategoryBackButtonStyle}" Command="{Binding}"/>
     </Grid>
 </Window>

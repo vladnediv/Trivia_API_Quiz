@@ -81,4 +81,17 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
+    <Style TargetType="Button" x:Key="CategoryBackButtonStyle">
+        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Bodoni MT"/>
+        <Setter Property="Margin" Value="5"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 </ResourceDictionary>
