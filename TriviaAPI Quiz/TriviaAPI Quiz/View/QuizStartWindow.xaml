@@ -1,0 +1,32 @@
+﻿<Window x:Class="TriviaAPI_Quiz.View.QuizStartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
+        mc:Ignorable="d"
+        Title="QuizStartWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding CurrentQuestion.Question}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+
+        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5">
+            <TextBlock FontSize="18" Text="{Binding CurrentNumberTask, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBlock FontSize="18">/</TextBlock>
+            <TextBlock FontSize="18" Text="{Binding ApiResultDb.ApiResult.Count}"></TextBlock>
+        </WrapPanel>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="&lt;" Command="{Binding PreviousQuestionCommand}"></Button>
+            <Button Content="&gt;" Grid.Column="1" Command="{Binding NextQuestionCommand}"></Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TriviaAPI_Quiz
+namespace TriviaAPI_Quiz.View
 {
     /// <summary>
-    /// Interaction logic for QuizWindow.xaml
+    /// Interaction logic for QuizStartWindow.xaml
     /// </summary>
-    public partial class QuizWindow : Window
+    public partial class QuizStartWindow : Window
     {
-        public QuizWindow()
+        public QuizStartWindow()
         {
             InitializeComponent();
         }

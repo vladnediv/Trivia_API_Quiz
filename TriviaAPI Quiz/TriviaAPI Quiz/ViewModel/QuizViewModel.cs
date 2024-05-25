@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms.Design;
 using System.Windows.Input;
+using TriviaAPI_Quiz.Infrastructure;
 using TriviaAPI_Quiz.Model;
 using TriviaAPI_Quiz.Service;
+using TriviaAPI_Quiz.View;
 
 namespace TriviaAPI_Quiz.ViewModel
 {
     public class QuizViewModel
     {
         private readonly TriviaApiService _ApiService;
-        private readonly QuizQuestionsService _QuestionService;
-        private readonly QuizResultService _ResultService;
 
-        public QuizViewModel(TriviaApiService apiService, QuizQuestionsService questionsService, QuizResultService resultService)
+        public QuizViewModel(TriviaApiService apiService)
         {
             _ApiService = apiService;
-            _QuestionService = questionsService;
-            _ResultService = resultService;
+            OpenHistoryCommand = new AsyncRelayCommand(OpenHistory);
             OpenHistoryCommand = new AsyncRelayCommand(OpenHistory);
             ChooseEasyCommand = new AsyncRelayCommand(ChooseEasy);
             ChooseMediumCommand = new AsyncRelayCommand(ChooseMedium);
@@ -124,6 +123,8 @@ namespace TriviaAPI_Quiz.ViewModel
         public async Task StartQuizAsync()
         {
             QuestionDifficulty difficulty = new QuestionDifficulty();
+
+
             if(IsEasy)
             {
                 difficulty = QuestionDifficulty.easy;
@@ -140,7 +141,11 @@ namespace TriviaAPI_Quiz.ViewModel
             {
                 difficulty = QuestionDifficulty.AnyDifficulty;
             }
+
+
             int category = await GetNumberInCollection(SelectedCategory, AllCategories);
+
+
             string type = "";
             if(SelectedType == "Any Type")
             {
@@ -154,13 +159,18 @@ namespace TriviaAPI_Quiz.ViewModel
             {
                 type = "boolean";
             }
+
+
             var result = await _ApiService.BuildAndStartRequest(AmountOfQuestions, category, difficulty, type);
-            string buf = result.ResponseCode.ToString()+"\n";
-            foreach(var item in result.ApiResults)
-            {
-                buf += item.Category + " " + item.Difficulty + " " + item.Question + "\n\n";
-            }
-            MessageBox.Show(buf);
+            
+            var window = (QuizStartWindow)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartWindow));
+
+            var viewModel = (QuizStartViewModel)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartViewModel));
+            viewModel.ApiResultDb = result;
+            viewModel.CurrentQuestion = result.ApiResults.FirstOrDefault();
+
+            window.DataContext = viewModel;
+            window.Show();
         }
         #endregion
     }
