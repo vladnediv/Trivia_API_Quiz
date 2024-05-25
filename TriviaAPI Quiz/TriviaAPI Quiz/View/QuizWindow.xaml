@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
         mc:Ignorable="d"
-        Title="QuizWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="QuizWindow" Height="650" Width="400">
+    <Grid Background="#FDF0D5"> 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="10" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#34252F">New Quiz</TextBlock>
+
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Padding="5" FontSize="20" Command="{Binding OpenHistoryCommand}">&#128337;</Button>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button FontSize="20" Margin="10" Command="{Binding ChooseEasyCommand}">Easy</Button>
+            <Button Grid.Column="1" FontSize="20" Margin="10" Command="{Binding ChooseMediumCommand}">Medium</Button>
+            <Button Grid.Column="2" FontSize="20" Margin="10" Command="{Binding ChooseHardCommand}">Hard</Button>
+        </Grid>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Choose Category:</TextBlock>
+            <ComboBox FontSize="20" SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding AllCategories}" Margin="10"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Choose Type:</TextBlock>
+            <ComboBox FontSize="20" SelectedItem="{Binding SelectedType}" ItemsSource="{Binding AllTypes}" Margin="10"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Number of Questions:</TextBlock>
+            <TextBox Margin="10" FontSize="20" Foreground="#34252F" Text="{Binding AmountOfQuestions}"></TextBox>
+        </StackPanel>
+
+        <Button FontSize="20" Margin="10" Grid.Row="5" Command="{Binding StartQuizCommand}">LET`S START THE QUIZ!</Button>
     </Grid>
 </Window>

@@ -39,7 +39,7 @@ namespace TriviaAPI_Quiz.Model
     }
 
     public enum QuestionType { AnyType, multiple, boolean }
-    public enum QuestionDifficulty { AnyDifficulty, Easy, Medium, Hard }
+    public enum QuestionDifficulty { AnyDifficulty, easy, medium, hard }
     public enum QuestionCategory
     {
         AnyCategory,

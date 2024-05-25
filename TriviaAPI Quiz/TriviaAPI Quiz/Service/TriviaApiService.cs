@@ -13,7 +13,7 @@ namespace TriviaAPI_Quiz.Service
     {
         public TriviaApiService() { }
 
-        public async Task<ApiResultDb> BuildAndStartRequest(int amount, QuestionCategory category, QuestionDifficulty difficulty, QuestionType type)
+        public async Task<ApiResultDb> BuildAndStartRequest(int amount, int category, QuestionDifficulty difficulty, string type)
         {
             var result = new ApiResult();
             string httpRequest = "";
@@ -21,15 +21,15 @@ namespace TriviaAPI_Quiz.Service
                 {
                     httpRequest = $"https://opentdb.com/api.php?amount={amount}";
                 }
-                if (category != QuestionCategory.AnyCategory)
+                if (category > 8)
                 {
-                    httpRequest += $"&category={((int)category + 8)}";
+                    httpRequest += $"&category={category}";
                 }
                 if (difficulty != QuestionDifficulty.AnyDifficulty)
                 {
                     httpRequest += $"&difficulty={difficulty}";
                 }
-                if (type != QuestionType.AnyType)
+                if (type != "AnyType")
                 {
                     httpRequest += $"&type={type}";
                 }
@@ -51,7 +51,5 @@ namespace TriviaAPI_Quiz.Service
             var entity = new ApiResultDb() { ResponseCode = (int)result.ResponseCode, ApiResults = list };
             return entity;
         }
-
-
     }
 }
