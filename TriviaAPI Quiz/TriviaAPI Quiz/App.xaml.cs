@@ -25,10 +25,14 @@ namespace TriviaAPI_Quiz
             ResourceDictionary historyWindow = new ResourceDictionary();
             historyWindow.Source = new Uri("Resources/Style/UIHistoryStyle.xaml", UriKind.Relative);
 
+            // Створюємо новий ResourceDictionary для вікна category
+            ResourceDictionary quizWindow = new ResourceDictionary();
+            quizWindow.Source = new Uri("Resources/Style/UIQuizStyle.xaml", UriKind.Relative);
+
             // Додаємо ці ResourceDictionary до Application рівня ресурсів
             Application.Current.Resources.MergedDictionaries.Add(mainWindow);
             Application.Current.Resources.MergedDictionaries.Add(categoryWindow);
-            Application.Current.Resources.MergedDictionaries.Add(historyWindow);
+            Application.Current.Resources.MergedDictionaries.Add(quizWindow);
         }
     }
 }
