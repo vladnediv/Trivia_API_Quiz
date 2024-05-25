@@ -10,7 +10,7 @@ namespace TriviaAPI_Quiz.Services
 {
     public static class StyleService
     {
-        public static void AddEqualsLabelToGrid(Grid grid, int row)
+        public static async Task AddEqualsLabelToGridAsync(Grid grid, int row)
         {
             // Створюємо новий Label
             Label equalsLabel = new Label
@@ -19,12 +19,16 @@ namespace TriviaAPI_Quiz.Services
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center
             };
+            
+            await Task.Run(() =>
+            {
+                Grid.SetRow(equalsLabel, row);
+                Grid.SetColumn(equalsLabel, 2);
+                Grid.SetColumnSpan(equalsLabel, 2);
 
-            Grid.SetRow(equalsLabel, row);
-            Grid.SetColumn(equalsLabel, 2);
-            Grid.SetColumnSpan(equalsLabel, 2);
-
-            grid.Children.Add(equalsLabel);
+                // Додаємо Label до Grid
+                grid.Children.Add(equalsLabel);
+            });
         }
     }
 }

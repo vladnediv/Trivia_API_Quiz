@@ -20,8 +20,14 @@ namespace TriviaAPI_Quiz
         public MainWindow()
         {
             InitializeComponent();
-            StyleService.AddEqualsLabelToGrid(myGrid, 1);
-            StyleService.AddEqualsLabelToGrid(myGrid, 5);
+            Loaded += MainWindow_Loaded; // Додати асинхронний завантажувач
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await StyleService.AddEqualsLabelToGridAsync(myGrid, 1);
+            await StyleService.AddEqualsLabelToGridAsync(myGrid, 5);
+
             //DataContext = new MainViewModel();
             //Icon = "pack://application:,,,/Resources/Image/QuizIcon.png"
             //Icon = "Resources/Image/QuizIcon.png"

@@ -63,7 +63,7 @@
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontFamily" Value="Script MT Bold"/>
     </Style>
-    <Style TargetType="Label" x:Key="DifficultyLabelStyle">
+    <Style TargetType="Label" x:Key="DifficultyUILabelStyle">
         <Setter Property="Grid.Column" Value="2"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Foreground" Value="DarkSlateGray"/>

@@ -13,17 +13,17 @@ namespace TriviaAPI_Quiz
         {
             base.OnStartup(e);
 
-            // Створюємо новий ResourceDictionary для стилів Window1
+            // Створюємо новий ResourceDictionary для вікна main
             ResourceDictionary mainWindow = new ResourceDictionary();
             mainWindow.Source = new Uri("Resources/Style/UIMainStyle.xaml", UriKind.Relative);
 
-            // Створюємо новий ResourceDictionary для стилів Window2
-            ResourceDictionary window2Styles = new ResourceDictionary();
-            //window2Styles.Source = new Uri("Resources/Window2Styles.xaml", UriKind.Relative);
+            // Створюємо новий ResourceDictionary для вікна category
+            ResourceDictionary categoryWindow = new ResourceDictionary();
+            categoryWindow.Source = new Uri("Resources/Style/UICategoryStyle.xaml", UriKind.Relative);
 
             // Додаємо ці ResourceDictionary до Application рівня ресурсів
             Application.Current.Resources.MergedDictionaries.Add(mainWindow);
-            Application.Current.Resources.MergedDictionaries.Add(window2Styles);
+            Application.Current.Resources.MergedDictionaries.Add(categoryWindow);
         }
     }
 }
