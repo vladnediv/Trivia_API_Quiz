@@ -10,7 +10,7 @@ using TriviaAPI_Quiz.Model;
 
 namespace TriviaAPI_Quiz.Repository
 {
-    public class QuestionsRepositoryAsync : IRepositoryAsync<ApiResult>
+    public class QuestionsRepositoryAsync : IRepositoryAsync<ApiResultDb>
     {
         private readonly QuestionsDbContext _dbContext;
         public QuestionsRepositoryAsync(QuestionsDbContext dbContext)
@@ -18,33 +18,33 @@ namespace TriviaAPI_Quiz.Repository
             _dbContext = dbContext;
         }
 
-        public async Task AddAsync(ApiResult entity)
+        public async Task AddAsync(ApiResultDb entity)
         {
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<ApiResult>> GetAllAsync() => await _dbContext.Questions.ToListAsync();
+        public async Task<ICollection<ApiResultDb>> GetAllAsync() => await _dbContext.ApiResults.ToListAsync();
 
-        public async Task<ApiResult> GetByIdAsync(int id) => await _dbContext.Questions.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<ApiResultDb> GetByIdAsync(int id) => await _dbContext.ApiResults.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task RemoveAsync(ApiResult entity)
+        public async Task RemoveAsync(ApiResultDb entity)
         {
-            _dbContext.Questions.Remove(entity);
+            _dbContext.ApiResults.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task RemoveByIdAsync(int id)
         {
-            var entity = await _dbContext.Questions.FirstOrDefaultAsync(x => x.Id == id);
-            _dbContext.Questions.Remove(entity);
+            var entity = await _dbContext.ApiResults.FirstOrDefaultAsync(x => x.Id == id);
+            _dbContext.ApiResults.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(int oldId, ApiResult entity)
+        public async Task UpdateAsync(int oldId, ApiResultDb entity)
         {
-            var toUpdate = await _dbContext.Questions.FirstOrDefaultAsync(x => x.Id == oldId);
-            toUpdate.Results = entity.Results;
+            var toUpdate = await _dbContext.ApiResults.FirstOrDefaultAsync(x => x.Id == oldId);
+            toUpdate.ApiResults = entity.ApiResults;
             toUpdate.ResponseCode = entity.ResponseCode;
 
 

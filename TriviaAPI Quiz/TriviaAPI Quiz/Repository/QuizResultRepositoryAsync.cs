@@ -24,26 +24,26 @@ namespace TriviaAPI_Quiz.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<QuizResult>> GetAllAsync() => await _dbContext.Results.ToListAsync();
+        public async Task<ICollection<QuizResult>> GetAllAsync() => await _dbContext.UserResults.ToListAsync();
 
-        public async Task<QuizResult> GetByIdAsync(int id) => await _dbContext.Results.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<QuizResult> GetByIdAsync(int id) => await _dbContext.UserResults.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task RemoveAsync(QuizResult entity)
         {
-            _dbContext.Results.Remove(entity);
+            _dbContext.UserResults.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task RemoveByIdAsync(int id)
         {
-            var entity = await _dbContext.Results.FirstOrDefaultAsync(x => x.Id == id);
-            _dbContext.Results.Remove(entity);
+            var entity = await _dbContext.UserResults.FirstOrDefaultAsync(x => x.Id == id);
+            _dbContext.UserResults.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(int oldId, QuizResult entity)
         {
-            var toUpdate = await _dbContext.Results.FirstOrDefaultAsync(x => x.Id == oldId);
+            var toUpdate = await _dbContext.UserResults.FirstOrDefaultAsync(x => x.Id == oldId);
             toUpdate.Category = entity.Category;
             toUpdate.CompletionTime = entity.CompletionTime;
             toUpdate.AmountIncorrect = entity.AmountIncorrect;
