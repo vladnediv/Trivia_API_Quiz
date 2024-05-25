@@ -1,8 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
-using TriviaAPI_Quiz.Infrastructure;
-using TriviaAPI_Quiz.View;
 
 namespace TriviaAPI_Quiz
 {
@@ -11,13 +9,30 @@ namespace TriviaAPI_Quiz
     /// </summary>
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            AppServiceProvider.Initialize();
+            base.OnStartup(e);
 
-            var window = (QuizWindow)AppServiceProvider.ServiceProvider.GetService(typeof(QuizWindow));
-            window.Show();
+            // Створюємо новий ResourceDictionary для вікна main
+            ResourceDictionary mainWindow = new ResourceDictionary();
+            mainWindow.Source = new Uri("Resources/Style/UIMainStyle.xaml", UriKind.Relative);
+
+            // Створюємо новий ResourceDictionary для вікна category
+            ResourceDictionary categoryWindow = new ResourceDictionary();
+            categoryWindow.Source = new Uri("Resources/Style/UICategoryStyle.xaml", UriKind.Relative);
+            
+            // Створюємо новий ResourceDictionary для вікна category
+            ResourceDictionary historyWindow = new ResourceDictionary();
+            historyWindow.Source = new Uri("Resources/Style/UIHistoryStyle.xaml", UriKind.Relative);
+
+            // Створюємо новий ResourceDictionary для вікна category
+            ResourceDictionary quizWindow = new ResourceDictionary();
+            quizWindow.Source = new Uri("Resources/Style/UIQuizStyle.xaml", UriKind.Relative);
+
+            // Додаємо ці ResourceDictionary до Application рівня ресурсів
+            Application.Current.Resources.MergedDictionaries.Add(mainWindow);
+            Application.Current.Resources.MergedDictionaries.Add(categoryWindow);
+            Application.Current.Resources.MergedDictionaries.Add(quizWindow);
         }
     }
-
 }
