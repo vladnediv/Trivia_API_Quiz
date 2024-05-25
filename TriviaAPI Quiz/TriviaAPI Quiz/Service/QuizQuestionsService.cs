@@ -17,16 +17,16 @@ namespace TriviaAPI_Quiz.Service
             _questionsRepository = questionsRepository;
         }
 
-        public async Task AddQuizAsync(ApiResult result) => await _questionsRepository.AddAsync(result);
+        public async Task AddQuizAsync(ApiResultDb result) => await _questionsRepository.AddAsync(result);
 
-        public async Task<ICollection<ApiResult>> GetAllQuizAsync() => await _questionsRepository.GetAllAsync();
+        public async Task<ICollection<ApiResultDb>> GetAllQuizAsync() => await _questionsRepository.GetAllAsync();
 
-        public async Task<ApiResult> GetQuizByIdAsync(int id) => await _questionsRepository.GetByIdAsync(id);
+        public async Task<ApiResultDb> GetQuizByIdAsync(int id) => await _questionsRepository.GetByIdAsync(id);
 
-        public async Task RemoveQuizAsync(ApiResult task) => await _questionsRepository.RemoveAsync(task);
+        public async Task RemoveQuizAsync(ApiResultDb task) => await _questionsRepository.RemoveAsync(task);
 
         public async Task RemoveQuizByIdAsync(int id) => await _questionsRepository.RemoveByIdAsync(id);
 
-        public async Task UpdateQuizAsync(int oldId, ApiResult task) => await _questionsRepository.UpdateAsync(oldId, task);
+        public async Task UpdateQuizAsync(int oldId, ApiResultDb task) => await _questionsRepository.UpdateAsync(oldId, task);
     }
 }

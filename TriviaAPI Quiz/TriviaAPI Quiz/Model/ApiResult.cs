@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,6 @@ namespace TriviaAPI_Quiz.Model
 {
     public class ApiResult
     {
-        public int Id { get; set; }
-
         [JsonProperty("response_code")]
         public long ResponseCode { get; set; }
 
@@ -20,8 +19,6 @@ namespace TriviaAPI_Quiz.Model
 
     public class ApiResultElement
     {
-        public int Id { get; set; }
-
         [JsonProperty("type")]
         public string Type { get; set; }
 
@@ -41,7 +38,7 @@ namespace TriviaAPI_Quiz.Model
         public List<string> IncorrectAnswers { get; set; }
     }
 
-    public enum QuestionType { AnyType, MultipleChoice, TrueFalse }
+    public enum QuestionType { AnyType, multiple, boolean }
     public enum QuestionDifficulty { AnyDifficulty, Easy, Medium, Hard }
     public enum QuestionCategory
     {

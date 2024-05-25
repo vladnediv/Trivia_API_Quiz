@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using TriviaAPI_Quiz.Context;
 using TriviaAPI_Quiz.Repository;
 using TriviaAPI_Quiz.Service;
+using TriviaAPI_Quiz.View;
+using TriviaAPI_Quiz.ViewModel;
 
 namespace TriviaAPI_Quiz.Infrastructure
 {
@@ -21,7 +23,7 @@ namespace TriviaAPI_Quiz.Infrastructure
             var service = new ServiceCollection();
 
             //DbContext
-            service.AddDbContext<QuestionsDbContext>();
+            service.AddDbContext<QuestionsDbContext, QuestionsDbContext>();
 
             //Repository
             service.AddTransient<QuestionsRepositoryAsync, QuestionsRepositoryAsync>();
@@ -33,9 +35,10 @@ namespace TriviaAPI_Quiz.Infrastructure
             service.AddTransient<QuizResultService, QuizResultService>();
 
             //ViewModel
-
+            service.AddTransient<QuizViewModel,  QuizViewModel>();
 
             //View
+            service.AddTransient<QuizWindow, QuizWindow>();
 
 
             ServiceProvider = service.BuildServiceProvider();

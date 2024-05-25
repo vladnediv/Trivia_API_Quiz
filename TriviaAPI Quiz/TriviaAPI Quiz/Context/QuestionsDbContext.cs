@@ -26,7 +26,13 @@ namespace TriviaAPI_Quiz.Context
             optionsBuilder.UseSqlServer(connectionString);
         }
 
-        public DbSet<ApiResult> Questions { get; set; }
-        public DbSet<QuizResult> Results { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApiResultDb>().HasMany(result => result.ApiResults).WithOne(element => element.ApiResult);
+        }
+
+        public DbSet<ApiResultElementDb> Questions { get; set; }
+        public DbSet<ApiResultDb> ApiResults { get; set; }
+        public DbSet<QuizResult> UserResults { get; set; }
     }
 }

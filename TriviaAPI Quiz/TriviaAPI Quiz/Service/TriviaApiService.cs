@@ -9,16 +9,14 @@ using TriviaAPI_Quiz.Model;
 
 namespace TriviaAPI_Quiz.Service
 {
-    internal class TriviaApiService
+    public class TriviaApiService
     {
         public TriviaApiService() { }
 
-        public async Task<ApiResult> BuildAndStartRequest(int amount, QuestionCategory category, QuestionDifficulty difficulty, QuestionType type)
+        public async Task<ApiResultDb> BuildAndStartRequest(int amount, QuestionCategory category, QuestionDifficulty difficulty, QuestionType type)
         {
             var result = new ApiResult();
-            await Task.Factory.StartNew(async () => 
-            {
-                string httpRequest = "";
+            string httpRequest = "";
                 if (amount > 0 && amount <= 50)
                 {
                     httpRequest = $"https://opentdb.com/api.php?amount={amount}";
@@ -40,8 +38,18 @@ namespace TriviaAPI_Quiz.Service
                     var apiResult = webClient.DownloadString(httpRequest);
                     result = JsonConvert.DeserializeObject<ApiResult>(apiResult);
                 }
-            });
-            return result;
+            var list = new List<ApiResultElementDb>();
+            foreach(var item in result.Results)
+            {
+                var incorrectAnswers = new List<Answer>();
+                foreach(var answer in item.IncorrectAnswers)
+                {
+                    incorrectAnswers.Add(new Answer() { Text = answer });
+                }
+                list.Add(new ApiResultElementDb() { Category = item.Category, Difficulty = item.Difficulty, Type = item.Type, Question = item.Question, CorrectAnswer = item.CorrectAnswer, IncorrectAnswers = incorrectAnswers });
+            }
+            var entity = new ApiResultDb() { ResponseCode = (int)result.ResponseCode, ApiResults = list };
+            return entity;
         }
 
 
