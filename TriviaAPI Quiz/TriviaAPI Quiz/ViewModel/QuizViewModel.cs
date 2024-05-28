@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -32,7 +33,7 @@ namespace TriviaAPI_Quiz.ViewModel
 
         #region History
         public ICommand OpenHistoryCommand { get; }
-        public async Task OpenHistory()
+        public async Task OpenHistoryAsync()
         {
 
         }
@@ -103,15 +104,18 @@ namespace TriviaAPI_Quiz.ViewModel
         public string SelectedType { get; set; } = "";
         #endregion
 
-        public async Task<int> GetNumberInCollection(string property, List<string> collection)
+        public async Task<int> GetNumberInCollectionAsync(string property, List<string> collection)
         {
-            int counter = 0;
-            foreach (string buf in collection)
+            return await Task<int>.Factory.StartNew(() => 
             {
-                counter++;
-                if(property == buf) { break; }
-            }
-            return counter + 7;
+                int counter = 0;
+                foreach (string buf in collection)
+                {
+                    counter++;
+                    if (property == buf) { break; }
+                }
+                return counter + 7;
+            });
         }
 
         #region Number of Questions
@@ -120,7 +124,7 @@ namespace TriviaAPI_Quiz.ViewModel
 
         #region Start the Quiz
         public ICommand StartQuizCommand { get; }
-        public async Task StartQuizAsync()
+        public async Task StartQuizAsync() 
         {
             QuestionDifficulty difficulty = new QuestionDifficulty();
 
@@ -143,7 +147,7 @@ namespace TriviaAPI_Quiz.ViewModel
             }
 
 
-            int category = await GetNumberInCollection(SelectedCategory, AllCategories);
+            int category = await GetNumberInCollectionAsync(SelectedCategory, AllCategories);
 
 
             string type = "";
@@ -159,18 +163,41 @@ namespace TriviaAPI_Quiz.ViewModel
             {
                 type = "boolean";
             }
+ 
+            try
+            {
+                var result = await _ApiService.BuildAndStartRequest(AmountOfQuestions, category, difficulty, type);
+                if (result.ResponseCode == 1)
+                {
+                    MessageBox.Show("Could not return results. The API doesn't have enough questions for your query.");
+                }
+                else {
+                    var window = (QuizStartWindow)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartWindow));
 
+                    var viewModel = (QuizStartViewModel)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartViewModel));
+                    viewModel.ApiResultDb = result;
+                    viewModel.CurrentQuestion = result.ApiResults.FirstOrDefault();
+                    viewModel.PossibleAnswers = new List<string>(result.GetAllPossibleAnswers(viewModel.CurrentQuestion));
+                    viewModel.UserAnswers = new List<string>();
+                    viewModel.UserAnswers.Capacity = viewModel.ApiResultDb.ApiResults.Count;
+                    for(int i = 0; i < viewModel.UserAnswers.Capacity; i++)
+                    {
+                        viewModel.UserAnswers.Add("");
+                    }
+                    viewModel.CloseWindow = () => { window.Close(); };
+                    viewModel._CompletionTime = new Stopwatch();
 
-            var result = await _ApiService.BuildAndStartRequest(AmountOfQuestions, category, difficulty, type);
-            
-            var window = (QuizStartWindow)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartWindow));
+                    viewModel._CompletionTime.Start();
 
-            var viewModel = (QuizStartViewModel)AppServiceProvider.ServiceProvider.GetService(typeof(QuizStartViewModel));
-            viewModel.ApiResultDb = result;
-            viewModel.CurrentQuestion = result.ApiResults.FirstOrDefault();
+                    window.DataContext = viewModel;
 
-            window.DataContext = viewModel;
-            window.Show();
+                    window.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }
