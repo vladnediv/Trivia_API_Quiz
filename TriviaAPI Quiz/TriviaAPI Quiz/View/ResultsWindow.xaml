@@ -1,0 +1,38 @@
+﻿<Window x:Class="TriviaAPI_Quiz.View.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
+        mc:Ignorable="d"
+        Title="ResultsWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Icon="/Image/QuizIcon.png">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/MainBackground2.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Results" Style="{StaticResource ResultsBlockStyle}"></TextBlock>
+        <ListView ItemsSource="{Binding}" Grid.Row="1" Background="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding Question}"/>
+                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding CorrectAnswer}"/>
+                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding YourAnswer}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding AmountCorrect}"></TextBlock>
+            <TextBlock Foreground="Orange" Text="/"></TextBlock>
+            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding AllQuestions}"></TextBlock>
+            <TextBlock Foreground="Orange" Margin="15" FontSize="18" Text="{Binding CompletionTime, UpdateSourceTrigger=Default}"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
