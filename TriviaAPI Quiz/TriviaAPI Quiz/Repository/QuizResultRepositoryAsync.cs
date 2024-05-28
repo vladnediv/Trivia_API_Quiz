@@ -44,7 +44,6 @@ namespace TriviaAPI_Quiz.Repository
         public async Task UpdateAsync(int oldId, QuizResult entity)
         {
             var toUpdate = await _dbContext.UserResults.FirstOrDefaultAsync(x => x.Id == oldId);
-            toUpdate.Category = entity.Category;
             toUpdate.CompletionTime = entity.CompletionTime;
             toUpdate.AmountIncorrect = entity.AmountIncorrect;
             toUpdate.AmountCorrect = entity.AmountCorrect;

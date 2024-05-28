@@ -5,48 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
         mc:Ignorable="d"
-        Title="Quiz" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-        Icon="/Image/QuizIcon.png">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Image/MainBackground3.png"/>
-        </Grid.Background>
+        Title="QuizWindow" Height="650" Width="400">
+    <Grid Background="#FDF0D5"> 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5">
-            <TextBlock FontSize="18" Text="{Binding CompletionTime, UpdateSourceTrigger=Default}"></TextBlock>
-            <TextBlock FontSize="18" Margin="5"></TextBlock>
-            <TextBlock FontSize="18" Text="{Binding CurrentNumberTask, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-            <TextBlock FontSize="18">/</TextBlock>
-            <TextBlock FontSize="18" Text="{Binding ApiResultDb.ApiResults.Count}"></TextBlock>
-        </WrapPanel>
+        <TextBlock Margin="10" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#34252F">New Quiz</TextBlock>
 
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Padding="5" FontSize="20" Command="{Binding OpenHistoryCommand}">&#128337;</Button>
 
-        <TextBlock Margin="5, 25, 5, 5" Text="{Binding CurrentQuestion.Question}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-
-
-        <ListBox Margin="5" Grid.Row="1" FontSize="25" ItemsSource="{Binding PossibleAnswers, UpdateSourceTrigger=PropertyChanged}"></ListBox>
-
-        <WrapPanel Grid.Row="2" Margin="5">
-            <TextBlock FontSize="25" FontWeight="Bold">Your answer -></TextBlock>
-            <TextBox FontSize="25" Background="Transparent" Text="{Binding UserAnswer, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"></TextBox>
-        </WrapPanel>
-
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonStyle}" Content="Previous Question" Command="{Binding PreviousQuestionCommand}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Content="Next Question" Grid.Column="1" Command="{Binding NextQuestionCommand}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Content="Finish Quiz" Grid.Column="2" Command="{Binding FinishQuizCommand}"></Button>
+
+            <Button FontSize="20" Margin="10" Command="{Binding ChooseEasyCommand}">Easy</Button>
+            <Button Grid.Column="1" FontSize="20" Margin="10" Command="{Binding ChooseMediumCommand}">Medium</Button>
+            <Button Grid.Column="2" FontSize="20" Margin="10" Command="{Binding ChooseHardCommand}">Hard</Button>
         </Grid>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Choose Category:</TextBlock>
+            <ComboBox FontSize="20" SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding AllCategories}" Margin="10"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Choose Type:</TextBlock>
+            <ComboBox FontSize="20" SelectedItem="{Binding SelectedType}" ItemsSource="{Binding AllTypes}" Margin="10"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4">
+            <TextBlock Margin="10" FontSize="20" Foreground="#34252F">Number of Questions:</TextBlock>
+            <TextBox Margin="10" FontSize="20" Foreground="#34252F" Text="{Binding AmountOfQuestions}"></TextBox>
+        </StackPanel>
+
+        <Button FontSize="20" Margin="10" Grid.Row="5" Command="{Binding StartQuizCommand}">LET`S START THE QUIZ!</Button>
     </Grid>
 </Window>

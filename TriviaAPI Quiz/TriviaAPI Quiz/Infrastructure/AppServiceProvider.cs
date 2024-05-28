@@ -36,9 +36,11 @@ namespace TriviaAPI_Quiz.Infrastructure
 
             //ViewModel
             service.AddTransient<QuizViewModel,  QuizViewModel>();
+            service.AddTransient<QuizStartViewModel, QuizStartViewModel>();
 
             //View
             service.AddTransient<QuizWindow, QuizWindow>();
+            service.AddTransient<QuizStartWindow, QuizStartWindow>();
 
 
             ServiceProvider = service.BuildServiceProvider();

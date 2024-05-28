@@ -12,6 +12,19 @@ namespace TriviaAPI_Quiz.Model
         public int Id { get; set; }
         public int ResponseCode { get; set; }
         public List<ApiResultElementDb> ApiResults { get; set; }
+        public List<Answer> UserAnswers { get; set; }
+        public List<string> GetAllPossibleAnswers(ApiResultElementDb question)
+        {
+            var list = new List<string>();
+            foreach (var answer in question.IncorrectAnswers)
+            {
+                list.Add(answer.Text);
+            }
+            list.Add(question.CorrectAnswer);
+            list.OrderBy(x => Random.Shared.Next()).ToList();
+
+            return list;
+        }
     }
 
     public class ApiResultElementDb

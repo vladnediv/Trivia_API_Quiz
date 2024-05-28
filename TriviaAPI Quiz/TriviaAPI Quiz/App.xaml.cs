@@ -11,7 +11,9 @@ namespace TriviaAPI_Quiz
     /// </summary>
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
+      
+
+        private void Application_Startup_1(object sender, StartupEventArgs e)
         {
             AppServiceProvider.Initialize();
 
@@ -19,5 +21,4 @@ namespace TriviaAPI_Quiz
             window.Show();
         }
     }
-
 }
