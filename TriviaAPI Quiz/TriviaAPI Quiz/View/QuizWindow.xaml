@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
         mc:Ignorable="d"
-        Title="QuizWindow" Height="450" Width="800">
+        Title="QuizWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Icon="/Image/QuizIcon.png">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Image/MainBackground3.png"/>
@@ -33,19 +34,19 @@
         <ListBox Margin="5" Grid.Row="1" FontSize="25" ItemsSource="{Binding PossibleAnswers, UpdateSourceTrigger=PropertyChanged}"></ListBox>
 
         <WrapPanel Grid.Row="2" Margin="5">
-            <TextBlock FontSize="25">Your answer -></TextBlock>
-            <TextBox FontSize="25" Text="{Binding UserAnswer, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"></TextBox>
+            <TextBlock FontSize="25" FontWeight="Bold">Your answer -></TextBlock>
+            <TextBox FontSize="25" Background="Transparent" Text="{Binding UserAnswer, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"></TextBox>
         </WrapPanel>
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button FontSize="30" Content="Previous Question" Command="{Binding PreviousQuestionCommand}"></Button>
-            <Button FontSize="30" Content="Next Question" Grid.Column="1" Command="{Binding NextQuestionCommand}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Content="Previous Question" Command="{Binding PreviousQuestionCommand}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Content="Next Question" Grid.Column="1" Command="{Binding NextQuestionCommand}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Content="Finish Quiz" Grid.Column="2" Command="{Binding FinishQuizCommand}"></Button>
         </Grid>
-
-        <Button Grid.Row="4" FontSize="30" Content="Finish Quiz" Command="{Binding FinishQuizCommand}"></Button>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Image\MainBackground2.png" />
     <None Remove="Image\MainBackground3.png" />
+    <None Remove="Image\QuizIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
   <ItemGroup>
     <Resource Include="Image\MainBackground2.png" />
     <Resource Include="Image\MainBackground3.png" />
+    <Resource Include="Image\QuizIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
