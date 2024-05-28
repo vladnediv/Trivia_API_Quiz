@@ -7,6 +7,45 @@
         mc:Ignorable="d"
         Title="QuizWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/MainBackground3.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5">
+            <TextBlock FontSize="18" Text="{Binding CompletionTime, UpdateSourceTrigger=Default}"></TextBlock>
+            <TextBlock FontSize="18" Margin="5"></TextBlock>
+            <TextBlock FontSize="18" Text="{Binding CurrentNumberTask, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBlock FontSize="18">/</TextBlock>
+            <TextBlock FontSize="18" Text="{Binding ApiResultDb.ApiResults.Count}"></TextBlock>
+        </WrapPanel>
+
+
+        <TextBlock Margin="5, 25, 5, 5" Text="{Binding CurrentQuestion.Question}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+
+
+        <ListBox Margin="5" Grid.Row="1" FontSize="25" ItemsSource="{Binding PossibleAnswers, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+
+        <WrapPanel Grid.Row="2" Margin="5">
+            <TextBlock FontSize="25">Your answer -></TextBlock>
+            <TextBox FontSize="25" Text="{Binding UserAnswer, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"></TextBox>
+        </WrapPanel>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="30" Content="Previous Question" Command="{Binding PreviousQuestionCommand}"></Button>
+            <Button FontSize="30" Content="Next Question" Grid.Column="1" Command="{Binding NextQuestionCommand}"></Button>
+        </Grid>
+
+        <Button Grid.Row="4" FontSize="30" Content="Finish Quiz" Command="{Binding FinishQuizCommand}"></Button>
     </Grid>
 </Window>

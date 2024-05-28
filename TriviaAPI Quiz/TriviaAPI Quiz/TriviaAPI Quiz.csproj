@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\MainBackground2.png" />
+    <None Remove="Image\MainBackground3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Infrastructure\" />
   </ItemGroup>
 
@@ -20,6 +25,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\MainBackground2.png" />
+    <Resource Include="Image\MainBackground3.png" />
   </ItemGroup>
 
   <ItemGroup>
