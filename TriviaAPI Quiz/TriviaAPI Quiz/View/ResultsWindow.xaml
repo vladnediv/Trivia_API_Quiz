@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaAPI_Quiz.View"
         mc:Ignorable="d"
-        Title="ResultsWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-        Icon="/Image/QuizIcon.png">
+        Title="ResultsWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Image/MainBackground2.png"/>
@@ -16,23 +15,41 @@
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Results" Style="{StaticResource ResultsBlockStyle}"></TextBlock>
-        <ListView ItemsSource="{Binding}" Grid.Row="1" Background="Transparent">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding Question}"/>
-                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding CorrectAnswer}"/>
-                        <TextBlock Foreground="Orange" Margin="5" Text="{Binding YourAnswer}"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <TextBlock Text="Results" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView ItemsSource="{Binding Questions}" Grid.Column="0" Background="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock FontSize="18" Foreground="Orange" Margin="5" Text="{Binding Question}"/>
+                            <TextBlock FontSize="18" Foreground="Green" Margin="5" Text="{Binding CorrectAnswer}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView ItemsSource="{Binding UserAnswers}" Grid.Column="1" Background="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock FontSize="18" Foreground="Wheat" Margin="5" Text="{Binding Text}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding AmountCorrect}"></TextBlock>
-            <TextBlock Foreground="Orange" Text="/"></TextBlock>
-            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding AllQuestions}"></TextBlock>
-            <TextBlock Foreground="Orange" Margin="15" FontSize="18" Text="{Binding CompletionTime, UpdateSourceTrigger=Default}"></TextBlock>
+            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding Result.AmountCorrect}"></TextBlock>
+            <TextBlock Foreground="Orange" Text="/" Margin="5" FontSize="18"></TextBlock>
+            <TextBlock Foreground="Orange" Margin="5" FontSize="18" Text="{Binding ApiResultDb.ApiResults.Count}"></TextBlock>
+            <TextBlock Foreground="Orange" Margin="15" FontSize="18" Text="{Binding Result.CompletionTime}"></TextBlock>
         </StackPanel>
     </Grid>
 </Window>

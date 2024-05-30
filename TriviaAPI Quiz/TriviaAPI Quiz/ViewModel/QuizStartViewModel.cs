@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TriviaAPI_Quiz.Infrastructure;
 using TriviaAPI_Quiz.Model;
 using TriviaAPI_Quiz.Service;
+using TriviaAPI_Quiz.View;
 
 namespace TriviaAPI_Quiz.ViewModel
 {
@@ -94,7 +96,7 @@ namespace TriviaAPI_Quiz.ViewModel
         public ICommand FinishQuizCommand { get; }
         public async Task FinishQuizAsync()
         {
-            await Task.Factory.StartNew(async () =>
+            var canContinue = await Task<bool>.Factory.StartNew(() =>
             {
                 _CompletionTime.Stop();
                 bool CanExecute = true;
@@ -107,8 +109,15 @@ namespace TriviaAPI_Quiz.ViewModel
                         break;
                     }
                 }
-                if(CanExecute)
+                return CanExecute;
+            });
+            int id = 0;
+
+            if(canContinue)
+            {
+                Task.Factory.StartNew(async () =>
                 {
+
                     ApiResultDb.UserAnswers = new List<Answer>();
                     foreach (var answer in UserAnswers)
                     {
@@ -117,9 +126,21 @@ namespace TriviaAPI_Quiz.ViewModel
                     await _quizQuestionsService.AddQuizAsync(ApiResultDb);
                     var userResult = await CalculateResultAsync();
                     await _quizResultService.AddQuizResultAsync(userResult);
-                    CloseWindow.Invoke();
-                }
-            });
+                    id = userResult.Id;
+                }).Wait();
+
+                var window = (ResultsWindow)AppServiceProvider.ServiceProvider.GetService(typeof(ResultsWindow));
+
+                var viewModel = (ResultsViewModel)AppServiceProvider.ServiceProvider.GetService(typeof(ResultsViewModel));
+                viewModel.ApiResultDb = ApiResultDb;
+                viewModel.Questions = ApiResultDb.ApiResults;
+                viewModel.UserAnswers = ApiResultDb.UserAnswers;
+                viewModel.Result = await _quizResultService.GetQuizResultByIdAsync(id);
+                window.DataContext = viewModel;
+
+                window.Show();
+            }
+            
         }
         public async Task<QuizResult> CalculateResultAsync()
         {

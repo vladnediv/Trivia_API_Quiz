@@ -13,7 +13,6 @@ namespace TriviaAPI_Quiz.Context
     {
         public QuestionsDbContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

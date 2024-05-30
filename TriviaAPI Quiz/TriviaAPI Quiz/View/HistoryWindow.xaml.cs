@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TriviaAPI_Quiz.ViewModel;
 
 namespace TriviaAPI_Quiz.View
 {
@@ -19,8 +20,9 @@ namespace TriviaAPI_Quiz.View
     /// </summary>
     public partial class HistoryWindow : Window
     {
-        public HistoryWindow()
+        public HistoryWindow(HistoryViewModel historyViewModel)
         {
+            DataContext = historyViewModel;
             InitializeComponent();
         }
     }

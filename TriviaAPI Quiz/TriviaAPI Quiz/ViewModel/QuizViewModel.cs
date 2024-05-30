@@ -23,8 +23,7 @@ namespace TriviaAPI_Quiz.ViewModel
         public QuizViewModel(TriviaApiService apiService)
         {
             _ApiService = apiService;
-            OpenHistoryCommand = new AsyncRelayCommand(OpenHistory);
-            OpenHistoryCommand = new AsyncRelayCommand(OpenHistory);
+            OpenHistoryCommand = new AsyncRelayCommand(OpenHistoryAsync);
             ChooseEasyCommand = new AsyncRelayCommand(ChooseEasy);
             ChooseMediumCommand = new AsyncRelayCommand(ChooseMedium);
             ChooseHardCommand = new AsyncRelayCommand(ChooseHard);
@@ -35,7 +34,8 @@ namespace TriviaAPI_Quiz.ViewModel
         public ICommand OpenHistoryCommand { get; }
         public async Task OpenHistoryAsync()
         {
-
+            var window = (HistoryWindow)AppServiceProvider.ServiceProvider.GetService(typeof(HistoryWindow));
+            window.Show();
         }
         #endregion
 

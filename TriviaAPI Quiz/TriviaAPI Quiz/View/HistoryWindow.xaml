@@ -16,20 +16,20 @@
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Quiz history" Style="{StaticResource HistoryTextBlockStyle}"></TextBlock>
-        <ListView ItemsSource="{Binding}" Grid.Row="1" Background="Transparent">
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Text="Quiz history"></TextBlock>
+        <ListView ItemsSource="{Binding PreviousResults}" Grid.Row="1" Background="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Margin="5" Text="{Binding Id}"/>
-                        <TextBlock Margin="5" Text="{Binding AmountCorrect}"/>
-                        <TextBlock Margin="5" Text="{Binding AmountFalse}"/>
-                        <TextBlock Margin="5" Text="{Binding CompletionITime}"/>
+                        <TextBlock Margin="50, 5, 5, 5" Text="{Binding AmountCorrect}"/>
+                        <TextBlock Margin="5" Text="{Binding AmountIncorrect}"/>
+                        <TextBlock Margin="5" Text="{Binding CompletionTime}"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="2" Content="Retry chosen Quiz" Style="{StaticResource RetryButtonStyle}" Width="150" Command="{Binding}"/>
+        <Button Grid.Row="2" Content="Retry chosen Quiz" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15" Command="{Binding}"/>
 
     </Grid>
 </Window>
